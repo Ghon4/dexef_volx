@@ -15,9 +15,19 @@ class ReportCubit extends Cubit<ReportStates> {
   void getReportData() {
     emit(AppReportLoadingState());
     DioHelper.getData(
-      url: 'Dexef_HR_WebService.asmx/getCategoryTrans',
+      url: 'getCategoryTrans',
+      query: {
+        'ip': '192.168.195.216',
+        'database': 'Hassan',
+        'category_id': 1,
+        'report_name': 'general_category_trans',
+        'from': '2010-01-01',
+        'to': '2020-12-31',
+      },
     ).then((value) {
       reportModel = ReportModel.fromJson(json.decode(value.data));
+      print(value.toString());
+
       // print(value.data.toString());
       //   reportModel = value.data['category_trans'];
 
