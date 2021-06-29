@@ -23,6 +23,7 @@ class ReportCubit extends Cubit<ReportStates> {
         'report_name': 'general_category_trans',
         'from': '2010-01-01',
         'to': '2020-12-31',
+        'page': 1
       },
     ).then((value) {
       reportModel = ReportModel.fromJson(json.decode(value.data));

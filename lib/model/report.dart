@@ -17,9 +17,9 @@ class CategoryTrans {
   String? dealingNum;
   String? dealingDt;
   String? dealingName;
-  int? quantity;
-  int? previousBalance;
-  int? balance;
+  double? quantity;
+  double? previousBalance;
+  double? balance;
 
   CategoryTrans.fromJson(Map<String, dynamic> json) {
     rN = json['RN'];

@@ -1,3 +1,4 @@
+import 'package:dexef_vol/model/report.dart';
 import 'package:flutter/material.dart';
 
 class DesignTest extends StatelessWidget {
@@ -5,6 +6,7 @@ class DesignTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ReportModel? reportModel;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -18,7 +20,8 @@ class DesignTest extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Category : Sam J7'),
+                      Text(reportModel!.categoryTrans!['categoryName']
+                          .toString()),
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
                     ],
