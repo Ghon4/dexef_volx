@@ -11,6 +11,7 @@ class ReportCubit extends Cubit<ReportStates> {
   static ReportCubit get(context) => BlocProvider.of(context);
 
   ReportModel? reportModel;
+
   // List<dynamic> reportModel = [];
   void getReportData() {
     emit(AppReportLoadingState());

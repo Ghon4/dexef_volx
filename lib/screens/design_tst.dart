@@ -6,7 +6,7 @@ class DesignTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ReportModel? reportModel;
+
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -20,8 +20,7 @@ class DesignTest extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(reportModel!.categoryTrans!['categoryName']
-                          .toString()),
+                      Text('category name'),
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
                     ],
