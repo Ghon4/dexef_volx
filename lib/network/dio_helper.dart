@@ -7,7 +7,6 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        //   baseUrl: 'http://hrws.dexef.com/',
         baseUrl: 'http://hrws.dexef.com/Dexef_HR_WebService.asmx/',
         receiveDataWhenStatusError: true,
       ),

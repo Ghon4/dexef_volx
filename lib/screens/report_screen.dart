@@ -29,7 +29,7 @@ class ReportScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Category :'
-                                '${list!.categoryTrans![0].categoryName}'), //'category name'
+                                '${list?.categoryTrans?[0].categoryName}'), //'category name'
                             IconButton(
                                 onPressed: () {},
                                 icon: Icon(Icons.arrow_forward_ios))
@@ -71,21 +71,21 @@ class ReportScreen extends StatelessWidget {
                                           color: Colors.blue,
                                           child: buildCategoryRow(
                                               'Date : '
-                                                  '${list.categoryTrans![index].dealingDt}',
+                                                  '${list?.categoryTrans?[index].dealingDt}',
                                               'Trans Num: '
-                                                  '${list.categoryTrans![index].dealingNum}')),
+                                                  '${list?.categoryTrans?[index].dealingNum}')),
                                       SizedBox(height: 12),
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Text('Transactions : '
-                                            '${list.categoryTrans![index].dealingName}'),
+                                            '${list?.categoryTrans?[index].dealingName}'),
                                       ), //'Transactions : data'
                                       SizedBox(height: 5),
                                       buildCategoryRow(
                                         'Quantity : '
-                                            '${list.categoryTrans![index].quantity}',
+                                            '${list?.categoryTrans?[index].quantity}',
                                         'Balance : '
-                                            '${list.categoryTrans![index].balance}',
+                                            '${list?.categoryTrans?[index].balance}',
                                       ),
                                     ],
                                   ),
@@ -102,7 +102,9 @@ class ReportScreen extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                             ),
-                        itemCount: list.categoryTrans!.length - 1),
+                        itemCount: list?.categoryTrans != null
+                            ? list!.categoryTrans!.length - 1
+                            : 0),
                   ),
                 ],
               )),

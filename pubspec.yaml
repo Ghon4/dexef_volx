@@ -30,6 +30,7 @@ dependencies:
   dio: ^4.0.0
   flutter_bloc: ^7.0.0
   conditional_builder: ^1.0.2
+  paging: ^0.1.0
 
 
 
