@@ -12,13 +12,12 @@ class ReportCubit extends Cubit<ReportStates> {
 
   ReportModel? reportModel;
 
-  // List<dynamic> reportModel = [];
   void getReportData() {
     emit(AppReportLoadingState());
     DioHelper.getData(
       url: 'getCategoryTrans',
       query: {
-        'ip': '192.168.195.216',
+        'ip': '92.205.20.173',
         'database': 'Hassan',
         'category_id': 1,
         'report_name': 'general_category_trans',
