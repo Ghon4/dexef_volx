@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dexef_vol/cubit/login/login_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,7 @@ class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(LoginInitialState());
   static LoginCubit get(context) => BlocProvider.of(context);
   Database? _database;
+  List<Map> companyData = [];
 
   Future<void> createDataBase() async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
@@ -26,6 +29,7 @@ class LoginCubit extends Cubit<LoginStates> {
       },
       onOpen: (database) {
         getDataFromDatabase(database);
+
         print('DB opened');
       },
     ).then(
@@ -39,6 +43,10 @@ class LoginCubit extends Cubit<LoginStates> {
   getDataFromDatabase(_database) {
     emit(LoginLoadingState());
     _database.rawQuery('SELECT * FROM loginData').then((value) {
+      value.forEach((element) {
+        companyData.add(element);
+      });
+      print(value.toString());
       emit(LoginOpenAndReadDBState());
     });
   }
@@ -50,18 +58,45 @@ class LoginCubit extends Cubit<LoginStates> {
     String userName,
     String password,
   ) async {
-    await _database!.transaction((txn) {
-      txn
-          .rawInsert(
-              'INSERT INTO loginData (companyName,routerIp,DBName,userName,password) VALUES ("$companyName","$routerIp","$DBName","$userName",,"$password")')
-          .then((value) {
-        emit(LoginInsertDBState());
-        getDataFromDatabase(_database);
-        print('$value raw inserted');
-      }).catchError((onError) {
-        print('$onError raw not inserted');
-      });
-      return null;
+    // _database!.insert('loginData', {
+    //   'companyName': "$companyName",
+    //   'routerIp': "$routerIp",
+    //   'DBName': "$DBName",
+    //   'userName': "$userName",
+    //   'password': "$password",
+    // }).then((value) {
+    //   emit(LoginInsertDBState());
+    //   getDataFromDatabase(_database);
+    //   print('$value raw inserted');
+    // }).catchError((onError) {
+    //   print('$onError raw not inserted');
+    // });
+    // ("$companyName","$routerIp","$DBName","$userName",,"$password")
+    await _database
+        ?.rawInsert(
+            'INSERT INTO loginData (companyName,routerIp,DBName,userName,password) VALUES ("$companyName","$routerIp","$DBName","$userName","$password")')
+        .then((value) {
+      emit(LoginInsertDBState());
+      getDataFromDatabase(_database);
+      print('$value raw inserted');
+    }).catchError((onError) {
+      print('$onError raw not inserted');
     });
+
+    // await _database?.transaction((txn) {
+
+    //   txn
+    //       .rawInsert(
+    //           'INSERT INTO loginData (companyName,routerIp,DBName,userName,password) VALUES
+    //                                  ("$companyName","$routerIp","$DBName","$userName",,"$password")')
+    //       .then((value) {
+    //     emit(LoginInsertDBState());
+    //     getDataFromDatabase(_database);
+    //     print('$value raw inserted');
+    //   }).catchError((onError) {
+    //     print('$onError raw not inserted');
+    //   });
+    //   return null;
+    // });
   }
 }
