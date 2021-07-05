@@ -36,17 +36,26 @@ class LoginCubit extends Cubit<LoginStates> {
       (value) {
         _database = value;
         emit(LoginCreateDBState());
-      },
-    );
-  }
+    );      },
+
+}
 
   getDataFromDatabase(_database) {
     emit(LoginLoadingState());
     _database.rawQuery('SELECT * FROM loginData').then((value) {
-      value.forEach((element) {
-        companyData.add(element);
+      companyData = value;
+      // print('data is :: $companyData');
+
+      companyData.forEach((element) {
+        print(element['companyName']);
       });
-      print(value.toString());
+
+      // value.forEach((element) {
+      //   companyData.add(element);
+      //   print(element['companyName']);
+      // });
+      // print(value.toString());
+
       emit(LoginOpenAndReadDBState());
     });
   }
